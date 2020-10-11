@@ -1,0 +1,79 @@
+{% extends 'base_layout.html' %}
+
+{% block stylecontent %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+        
+        body {
+            background-color: papayawhip;
+        }
+        h2 {
+            font-family: 'Slabo 27px';
+            border-bottom: 1px solid black;
+            font-weight: 900;
+        }
+        form ul {
+            list-style: none;
+        }
+    </style>
+
+            
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+
+        
+{% block bodycontent %}        
+    <h2 class="container text-center">Создать новый аккаунт</h2>
+    <h6 class="text-center"><em>(Необходимо заполнить все поля )</em></h6>
+    <br>
+    
+    <form class="container" action="/accounts/register/" method="post">
+        {% csrf_token %}
+        <section class="form-control">
+            <h4>Введите данные</h4>
+            {{ form }}
+        </section>
+        <br>
+        
+        <!-- <div class="g-recaptcha" data-sitekey="6Ld_qjQUAAAAADjv2scrqpvXK4OrBZALRJFMANpP"></div> -->
+        
+        <br>
+        
+        <section>
+            <input type="checkbox" required> 
+            <small>Нажимая на "Создать новый аккаунт" вы соглашаетесь с нашей
+                <a href="#">Политикой конфиденциальности</a>.</small>
+        </section>
+        
+        <br>
+        
+        <input type="submit" class="form-control btn btn-primary" value="Создать аккаунт" name="submit"
+        />
+        
+    </form>
+
+    <br>
+{% endblock %}
+
+{% block scriptcontent %}
+    <script>
+        $(".active").removeClass("active");
+        $("#nav-create").addClass("active");
+
+        $(".helptext").html("");
+
+        var input_text = $("input[type=text]");
+        input_text.addClass("form-control");
+
+        var input_pass = $("input[type=password]");
+        input_pass.addClass("form-control");
+
+        $("form ul li").addClass("btn btn-danger");
+
+        // var labels = $("label");
+
+        // labels.addClass("col");
+        // input_text.addClass("col")
+        // input_pass.addClass("col");
+    </script>
+{% endblock %}
